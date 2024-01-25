@@ -1,7 +1,11 @@
 import React from "react";
-import { getPedal } from "../../data/services";
+import {
+  getPedalById,
+  getAllPedals,
+  getCertainPedals,
+} from "../../data/services";
 
-getPedal();
+getCertainPedals();
 
 const TestProduct = () => {
   return <div></div>;
