@@ -15,6 +15,7 @@ const ProductGrid = ({ pedals }) => {
               description={pedal.description}
               id={pedal.id}
               image={pedal.image}
+              maxQuantity={pedal.maxQuantity}
               shortName={pedal.shortName}
               type={pedal.type}
               price={pedal.price}
