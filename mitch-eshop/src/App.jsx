@@ -1,13 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.scss";
 import HomePage from "./pages/HomePage/HomePage";
 import ProductPage from "./pages/ProductPage/ProductPage";
 import NavBar from "./containers/NavBar/NavBar";
+import FavouritesPage from "./pages/FavouritesPage/FavouritesPage";
 
 function App() {
   const [cartData, setCartData] = useState([]);
   const [favouritesData, setFavouritesData] = useState([]);
+
+  // const pullCartFromStorage = () => {
+  //   setCartData(JSON.parse(localStorage.getItem("cartItems"))).then((res) => {
+  //     console.log(res);
+  //   });
+  // };
+
+  // const pullFavouritesFromStorage = () => {
+  //   setFavouritesData(JSON.parse(localStorage.getItem("favouriteItems")));
+  // };
+
+  useEffect(() => {
+    setCartData(JSON.parse(localStorage.getItem("cartItems")));
+    console.log(JSON.parse(localStorage.getItem("cartItems")));
+    setFavouritesData(JSON.parse(localStorage.getItem("favouriteItems")));
+    console.log(JSON.parse(localStorage.getItem("favouriteItems")));
+  }, []);
+
+  //useEffect here to grab initial favourites data from the local storage
 
   return (
     <>
@@ -30,6 +50,15 @@ function App() {
             }
           />
           {/* Route - Product Page */}
+          <Route
+            path="/favourites"
+            element={
+              <FavouritesPage
+                favouritesData={favouritesData}
+                setFavouritesData={setFavouritesData}
+              />
+            }
+          />
           {/* Route - Favourites Page */}
           {/* Route - Cart */}
           {/* Routes */}

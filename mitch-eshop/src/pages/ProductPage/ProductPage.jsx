@@ -83,6 +83,13 @@ const ProductPage = ({
     }
   };
 
+  const handleRemoveFromFavourites = () => {
+    // if (favouritesData.includes(id)) {
+    //   setFavouritesData([...favouritesData, id]);
+    // }
+    //hasnt been implemented yet, need to re work all my state arrays to use copies instead of directly mutating the state array.
+  };
+
   return (
     <main>
       {/* Product Card */}
@@ -117,6 +124,13 @@ const ProductPage = ({
         }}
       >
         Add To Favourites
+      </button>
+      <button
+        onClick={() => {
+          handleRemoveFromFavourites();
+        }}
+      >
+        Remove From Favourites
       </button>
     </main>
   );

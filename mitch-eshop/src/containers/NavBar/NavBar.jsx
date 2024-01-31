@@ -8,6 +8,7 @@ const NavBar = () => {
       <NavLink to="/">Home</NavLink>
       {/* Search Bar */}
       {/* Home Link */}
+      <NavLink to="/favourites">Favourites</NavLink>
       {/* Favourites Link */}
       {/* Cart Link */}
     </nav>

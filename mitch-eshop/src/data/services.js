@@ -21,8 +21,9 @@ export const getAllPedals = async () => {
 };
 
 export const getCertainPedals = async () => {
+  //aint working yet
   const querySnapshot = await getDocs(
-    query(collection(db, "products"), where("company", "==", "BOSS"))
+    query(collection(db, "products"), where("id", "==", id))
   );
   const dataToReturn = querySnapshot.docs.map((pedal) => {
     return {
