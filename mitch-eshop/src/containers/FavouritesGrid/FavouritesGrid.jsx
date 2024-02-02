@@ -30,14 +30,14 @@ const FavouritesGrid = ({ setFavouritesData, favouritesData }) => {
   return (
     <div>
       {favouritesList &&
-        favouritesList.map((pedal) => {
+        favouritesList.map((pedal, i) => {
           return (
             <ProductCard
-              key={pedal.id}
+              key={favouritesData[i]}
               name={pedal.name}
               company={pedal.company}
               description={pedal.description}
-              id={pedal.id}
+              id={favouritesData[i]}
               image={pedal.image}
               maxQuantity={pedal.maxQuantity}
               shortName={pedal.shortName}

@@ -16,7 +16,7 @@ export const getAllPedals = async () => {
       ...pedal.data(),
     };
   });
-  console.log(dataToReturn);
+  // console.log(dataToReturn);
   return dataToReturn;
 };
 
@@ -39,7 +39,8 @@ export const getPedalById = async (id) => {
   const docSnap = await getDoc(docRef);
 
   if (docSnap.exists()) {
-    return docSnap.data();
+    console.log(docSnap.data());
+    return docSnap.data(); //doesnt return the pedals id {id: id, ...docSnap.data()};
   } else {
     return "No such document!";
   }

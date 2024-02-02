@@ -12,8 +12,8 @@ const ProductPage = ({
   const id = pathVariables.id;
 
   const [productData, setProductData] = useState(null);
+  const [variantData, setVariantData] = useState(null);
   const [loading, setLoading] = useState(null);
-  // const [cartData, setCartData] = useState([]);s
 
   const [quantity, setQuantity] = useState(1);
 
@@ -41,15 +41,21 @@ const ProductPage = ({
   useEffect(() => {
     setLoading(true);
     getPedalById(id)
-      .then((res) => setProductData(res))
+      .then((res) => {
+        setProductData(res);
+        setVariantData(res.variants[0]);
+      })
       .catch((e) => console.log(e.message))
       .finally(() => setLoading(false));
   }, [id]);
 
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartData));
-    // console.log(localStorage)
   }, [cartData]);
+
+  useEffect(() => {
+    localStorage.setItem("favouriteItems", JSON.stringify(favouritesData));
+  }, [favouritesData]);
 
   const handleAddToCart = () => {
     let cartObj = {
@@ -57,13 +63,16 @@ const ProductPage = ({
       name: productData.name,
       price: productData.price,
       quantity: JSON.parse(quantity),
+      variant: variantData.variantName,
     };
-    console.log(!cartData.some((item) => item.id == id));
 
-    if (!cartData.some((item) => item.id == id)) {
+    if (
+      !cartData.some((item) => item.id == id) ||
+      !cartData.some((item) => item.variant == cartObj.variant)
+    ) {
       setCartData((cartData) => [...cartData, cartObj]);
     } else {
-      let duplicateItemIndex = cartData.findIndex((item) => item.id == id);
+      let duplicateItemIndex = cartData.findIndex((item) => item.id == id); //this is where variant glitch is
       console.log(duplicateItemIndex);
       cartObj.quantity += cartData[duplicateItemIndex].quantity;
       let tempArr = cartData.filter((item) => item.id !== cartObj.id);
@@ -73,10 +82,6 @@ const ProductPage = ({
     }
   };
 
-  useEffect(() => {
-    localStorage.setItem("favouriteItems", JSON.stringify(favouritesData));
-  }, [favouritesData]);
-
   const handleAddToFavourites = () => {
     if (!favouritesData.includes(id)) {
       setFavouritesData([...favouritesData, id]);
@@ -84,10 +89,14 @@ const ProductPage = ({
   };
 
   const handleRemoveFromFavourites = () => {
-    // if (favouritesData.includes(id)) {
-    //   setFavouritesData([...favouritesData, id]);
-    // }
-    //hasnt been implemented yet, need to re work all my state arrays to use copies instead of directly mutating the state array.
+    let tmp = [...favouritesData];
+    tmp.splice(tmp.indexOf(id), 1);
+    setFavouritesData(tmp);
+  };
+
+  const handleVariantChange = (selectObjectIndex) => {
+    console.log(selectObjectIndex);
+    setVariantData(productData.variants[selectObjectIndex]);
   };
 
   return (
@@ -97,10 +106,10 @@ const ProductPage = ({
       {!loading && productData && (
         <>
           <h1>
-            {productData.company} {productData.shortName} {productData.name}
-            {productData.type} Pedal
+            {variantData.variantTitle ||
+              `${productData.company}  ${productData.shortName} ${productData.name} ${productData.pedalType} pedal`}
           </h1>
-          <img src={productData.image} />
+          <img src={variantData.variantImage || productData.image} />
           <h2>${productData.price}.00 AUD</h2>
           <p>{productData.description}</p>
         </>
@@ -132,6 +141,16 @@ const ProductPage = ({
       >
         Remove From Favourites
       </button>
+      {/* Variants */}
+      {productData && (
+        <select
+          onChange={(e) => handleVariantChange(e.target.options.selectedIndex)}
+        >
+          {productData.variants.map((variant) => {
+            return <option value={variant}>{variant.variantName}</option>;
+          })}
+        </select>
+      )}
     </main>
   );
 };
