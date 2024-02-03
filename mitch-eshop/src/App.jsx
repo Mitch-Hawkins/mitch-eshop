@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage/HomePage";
 import ProductPage from "./pages/ProductPage/ProductPage";
 import NavBar from "./containers/NavBar/NavBar";
 import FavouritesPage from "./pages/FavouritesPage/FavouritesPage";
+import CartPage from "./pages/CartPage/CartPage";
 
 function App() {
   const [cartData, setCartData] = useState([]);
@@ -60,6 +61,10 @@ function App() {
             }
           />
           {/* Route - Favourites Page */}
+          <Route
+            path="/cart"
+            element={<CartPage cartData={cartData} setCartData={setCartData} />}
+          />
           {/* Route - Cart */}
           {/* Routes */}
         </Routes>

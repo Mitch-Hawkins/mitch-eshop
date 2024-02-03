@@ -10,6 +10,7 @@ const NavBar = () => {
       {/* Home Link */}
       <NavLink to="/favourites">Favourites</NavLink>
       {/* Favourites Link */}
+      <NavLink to="/cart">Cart</NavLink>
       {/* Cart Link */}
     </nav>
   );

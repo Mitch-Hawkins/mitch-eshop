@@ -13,8 +13,8 @@ const ProductPage = ({
 
   const [productData, setProductData] = useState(null);
   const [variantData, setVariantData] = useState(null);
+  const [pedalFullName, setPedalFullName] = useState("");
   const [loading, setLoading] = useState(null);
-
   const [quantity, setQuantity] = useState(1);
 
   const handleInputChange = (e) => {
@@ -44,6 +44,9 @@ const ProductPage = ({
       .then((res) => {
         setProductData(res);
         setVariantData(res.variants[0]);
+        setPedalFullName(
+          `${res.company}  ${res.shortName} ${res.name} ${res.pedalType} Pedal`
+        );
       })
       .catch((e) => console.log(e.message))
       .finally(() => setLoading(false));
@@ -64,6 +67,7 @@ const ProductPage = ({
       price: productData.price,
       quantity: JSON.parse(quantity),
       variant: variantData.variantName,
+      image: variantData.variantImage || productData.image,
     };
 
     if (
@@ -72,10 +76,14 @@ const ProductPage = ({
     ) {
       setCartData((cartData) => [...cartData, cartObj]);
     } else {
-      let duplicateItemIndex = cartData.findIndex((item) => item.id == id); //this is where variant glitch is
+      let duplicateItemIndex = cartData.findIndex(
+        (item) => item.id == id && item.variant == cartObj.variant
+      );
       console.log(duplicateItemIndex);
       cartObj.quantity += cartData[duplicateItemIndex].quantity;
-      let tempArr = cartData.filter((item) => item.id !== cartObj.id);
+      let tempArr = cartData.filter(
+        (item) => (item.id !== cartObj.id) + (item.variant !== cartObj.variant)
+      );
       tempArr.push(cartObj);
       console.log(tempArr);
       setCartData(tempArr);
@@ -90,8 +98,13 @@ const ProductPage = ({
 
   const handleRemoveFromFavourites = () => {
     let tmp = [...favouritesData];
-    tmp.splice(tmp.indexOf(id), 1);
-    setFavouritesData(tmp);
+    let indexOfItemToBeRemoved = tmp.indexOf(id);
+    if (indexOfItemToBeRemoved < 0) {
+      return;
+    } else {
+      tmp.splice(indexOfItemToBeRemoved, 1); //need a failsafe here
+      setFavouritesData(tmp);
+    }
   };
 
   const handleVariantChange = (selectObjectIndex) => {
@@ -106,8 +119,9 @@ const ProductPage = ({
       {!loading && productData && (
         <>
           <h1>
-            {variantData.variantTitle ||
-              `${productData.company}  ${productData.shortName} ${productData.name} ${productData.pedalType} pedal`}
+            {(variantData.variantTitle &&
+              `${pedalFullName} (${variantData.variantName})`) ||
+              pedalFullName}
           </h1>
           <img src={variantData.variantImage || productData.image} />
           <h2>${productData.price}.00 AUD</h2>

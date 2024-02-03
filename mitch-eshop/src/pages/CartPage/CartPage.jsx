@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
+import CartContainer from "../../containers/CartContainer/CartContainer";
 
-const CartPage = () => {
-  return <div>{/* List of Products in Cart with Cart Product Card */}</div>;
+const CartPage = ({ cartData, setCartData }) => {
+  return (
+    <div>
+      <CartContainer cartData={cartData} setCartData={setCartData} />
+      <button>Checkout</button>
+    </div>
+  );
 };
 
 export default CartPage;
