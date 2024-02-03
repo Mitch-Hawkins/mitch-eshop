@@ -2,7 +2,7 @@ import React from "react";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import styles from "./ProductGrid.module.scss";
 
-const ProductGrid = ({ pedals }) => {
+const ProductGrid = ({ pedals, favouritesData, setFavouritesData }) => {
   return (
     <div className={styles.container}>
       {pedals &&
@@ -19,6 +19,8 @@ const ProductGrid = ({ pedals }) => {
               shortName={pedal.shortName}
               type={pedal.type}
               price={pedal.price}
+              favouritesData={favouritesData}
+              setFavouritesData={setFavouritesData}
             />
           );
         })}

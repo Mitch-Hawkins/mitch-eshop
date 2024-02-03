@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getAllPedals } from "../../data/services";
 import ProductGrid from "../../containers/ProductGrid/ProductGrid";
 
-const HomePage = () => {
+const HomePage = ({ favouritesData, setFavouritesData }) => {
   const [pedals, setPedals] = useState(null);
 
   useEffect(() => {
@@ -13,7 +13,13 @@ const HomePage = () => {
     <div>
       {/* Carousel */}
       {/* Product Results List of Cards*/}
-      {pedals && <ProductGrid pedals={pedals} />}
+      {pedals && (
+        <ProductGrid
+          pedals={pedals}
+          favouritesData={favouritesData}
+          setFavouritesData={setFavouritesData}
+        />
+      )}
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getPedalById } from "../../data/services";
+import FavouriteButton from "../../components/FavouriteButton/FavouriteButton";
 
 const ProductPage = ({
   cartData,
@@ -52,14 +53,6 @@ const ProductPage = ({
       .finally(() => setLoading(false));
   }, [id]);
 
-  useEffect(() => {
-    localStorage.setItem("cartItems", JSON.stringify(cartData));
-  }, [cartData]);
-
-  useEffect(() => {
-    localStorage.setItem("favouriteItems", JSON.stringify(favouritesData));
-  }, [favouritesData]);
-
   const handleAddToCart = () => {
     let cartObj = {
       id: id,
@@ -68,6 +61,7 @@ const ProductPage = ({
       quantity: JSON.parse(quantity),
       variant: variantData.variantName,
       image: variantData.variantImage || productData.image,
+      maxQuantity: productData.maxQuantity,
     };
 
     if (
@@ -75,35 +69,27 @@ const ProductPage = ({
       !cartData.some((item) => item.variant == cartObj.variant)
     ) {
       setCartData((cartData) => [...cartData, cartObj]);
+      localStorage.setItem("cartItems", JSON.stringify([...cartData, cartObj]));
     } else {
       let duplicateItemIndex = cartData.findIndex(
         (item) => item.id == id && item.variant == cartObj.variant
       );
       console.log(duplicateItemIndex);
-      cartObj.quantity += cartData[duplicateItemIndex].quantity;
+      if (
+        cartObj.quantity + cartData[duplicateItemIndex].quantity >
+        cartObj.maxQuantity
+      ) {
+        cartObj.quantity = cartObj.maxQuantity;
+      } else {
+        cartObj.quantity += cartData[duplicateItemIndex].quantity;
+      }
       let tempArr = cartData.filter(
         (item) => (item.id !== cartObj.id) + (item.variant !== cartObj.variant)
       );
       tempArr.push(cartObj);
       console.log(tempArr);
       setCartData(tempArr);
-    }
-  };
-
-  const handleAddToFavourites = () => {
-    if (!favouritesData.includes(id)) {
-      setFavouritesData([...favouritesData, id]);
-    }
-  };
-
-  const handleRemoveFromFavourites = () => {
-    let tmp = [...favouritesData];
-    let indexOfItemToBeRemoved = tmp.indexOf(id);
-    if (indexOfItemToBeRemoved < 0) {
-      return;
-    } else {
-      tmp.splice(indexOfItemToBeRemoved, 1); //need a failsafe here
-      setFavouritesData(tmp);
+      localStorage.setItem("cartItems", JSON.stringify(tempArr));
     }
   };
 
@@ -141,20 +127,11 @@ const ProductPage = ({
         Add To Cart
       </button>
       {/* Favourite Button */}
-      <button
-        onClick={() => {
-          handleAddToFavourites();
-        }}
-      >
-        Add To Favourites
-      </button>
-      <button
-        onClick={() => {
-          handleRemoveFromFavourites();
-        }}
-      >
-        Remove From Favourites
-      </button>
+      <FavouriteButton
+        favouritesData={favouritesData}
+        setFavouritesData={setFavouritesData}
+        id={id}
+      />
       {/* Variants */}
       {productData && (
         <select

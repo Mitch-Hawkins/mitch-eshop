@@ -45,7 +45,3 @@ export const getPedalById = async (id) => {
     return "No such document!";
   }
 };
-
-// export const cleanPedalData = (rawData) => {
-
-// }

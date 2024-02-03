@@ -8,7 +8,6 @@ const FavouritesGrid = ({ setFavouritesData, favouritesData }) => {
   console.log(favouritesData);
 
   useEffect(() => {
-    // let tmp = favouritesData.map((id) => getPedalById(id));
     let tmp = [];
     favouritesData.forEach((id) =>
       getPedalById(id).then((res) => {
@@ -16,20 +15,13 @@ const FavouritesGrid = ({ setFavouritesData, favouritesData }) => {
         setFavouritesList([...tmp]);
       })
     );
-    // setFavouritesList(favouritesData.map((id) => getPedalById(id)));
-
-    // setFavouritesList([...tmp]);
   }, [favouritesData]);
 
-  //   let favouritesList = favouritesData.map((id) =>
-  //     getPedalById(id).then((res) => console.log(res))
-  //   );
-
-  console.log(favouritesList[0]);
+  console.log(favouritesData);
 
   return (
     <div>
-      {favouritesList &&
+      {favouritesData.length > 0 &&
         favouritesList.map((pedal, i) => {
           return (
             <ProductCard
@@ -43,6 +35,8 @@ const FavouritesGrid = ({ setFavouritesData, favouritesData }) => {
               shortName={pedal.shortName}
               type={pedal.type}
               price={pedal.price}
+              favouritesData={favouritesData}
+              setFavouritesData={setFavouritesData}
             />
           );
         })}

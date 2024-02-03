@@ -17,6 +17,8 @@ const CartContainer = ({ cartData, setCartData }) => {
               image={item.image}
               cartData={cartData}
               setCartData={setCartData}
+              id={item.id}
+              maxQuantity={item.maxQuantity}
             />
           );
         })}

@@ -22,6 +22,19 @@ function App() {
   // };
 
   useEffect(() => {
+    if (JSON.parse(localStorage.getItem("cartItems"))) {
+      setCartData(JSON.parse(localStorage.getItem("cartItems")));
+    } else {
+      localStorage.setItem("cartItems", "[]");
+    }
+    if (JSON.parse(localStorage.getItem("favouriteItems"))) {
+      setFavouritesData(JSON.parse(localStorage.getItem("favouriteItems")));
+    } else {
+      localStorage.setItem("favouriteItems", "[]");
+    }
+  }, []);
+
+  useEffect(() => {
     setCartData(JSON.parse(localStorage.getItem("cartItems")));
     console.log(JSON.parse(localStorage.getItem("cartItems")));
     setFavouritesData(JSON.parse(localStorage.getItem("favouriteItems")));
@@ -37,7 +50,15 @@ function App() {
         <NavBar />
         {/* NavBar */}
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route
+            path="/"
+            element={
+              <HomePage
+                favouritesData={favouritesData}
+                setFavouritesData={setFavouritesData}
+              />
+            }
+          />
           {/* Route - Homepage */}
           <Route
             path="/product/:id"
