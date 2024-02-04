@@ -5,6 +5,7 @@ import styles from "./NavBar.module.scss";
 const NavBar = () => {
   return (
     <nav className={styles.container}>
+      <h1>Pedal Planet</h1>
       {/* Header */}
       <NavLink
         to="/"
