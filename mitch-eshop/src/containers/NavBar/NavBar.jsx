@@ -1,11 +1,13 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import styles from "./NavBar.module.scss";
 
 const NavBar = () => {
+  const navigate = useNavigate();
+
   return (
     <nav className={styles.container}>
-      <h1>Pedal Planet</h1>
+      <h1 onClick={() => navigate("/")}>Pedal Planet</h1>
       {/* Header */}
       <NavLink
         to="/"
