@@ -6,12 +6,45 @@ const NavBar = () => {
   return (
     <nav className={styles.container}>
       {/* Header */}
-      <NavLink to="/">Home</NavLink>
+      <NavLink
+        to="/"
+        className={({ isActive, isPending, isTransitioning }) =>
+          [
+            isPending ? "pending" : "basic",
+            isActive ? "active" : "basic",
+            isTransitioning ? "transitioning" : "basic",
+          ].join(" ")
+        }
+      >
+        Home
+      </NavLink>
       {/* Search Bar */}
       {/* Home Link */}
-      <NavLink to="/favourites">Favourites</NavLink>
+      <NavLink
+        to="/favourites"
+        className={({ isActive, isPending, isTransitioning }) =>
+          [
+            isPending ? "pending" : "basic",
+            isActive ? "active" : "basic",
+            isTransitioning ? "transitioning" : "basic",
+          ].join(" ")
+        }
+      >
+        Favourites
+      </NavLink>
       {/* Favourites Link */}
-      <NavLink to="/cart">Cart</NavLink>
+      <NavLink
+        to="/cart"
+        className={({ isActive, isPending, isTransitioning }) =>
+          [
+            isPending ? "pending" : "basic",
+            isActive ? "active" : "basic",
+            isTransitioning ? "transitioning" : "basic",
+          ].join(" ")
+        }
+      >
+        Cart
+      </NavLink>
       {/* Cart Link */}
     </nav>
   );

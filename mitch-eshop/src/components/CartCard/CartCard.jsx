@@ -61,13 +61,22 @@ const CartCard = ({
         </div>
         <div className={styles.priceContainer}>
           <div className={styles.quantityContainer}>
-            <button onClick={handleIncrement}>+</button>
+            <button className={styles.quantityButton} onClick={handleDecrement}>
+              -
+            </button>
             <p>Quantity: {quantity}</p>
-            <button onClick={handleDecrement}>-</button>
+            <button onClick={handleIncrement} className={styles.quantityButton}>
+              +
+            </button>
           </div>
           <p>Price: ${quantity * price}.00 AUD</p>
         </div>
-        <button onClick={handleRemoveFromCart}>Remove from Cart</button>
+        <button
+          className={styles.removeFromCartButton}
+          onClick={handleRemoveFromCart}
+        >
+          Remove from Cart
+        </button>
       </div>
     </div>
   );

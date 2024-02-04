@@ -143,17 +143,28 @@ const ProductPage = ({
             <h2>${productData.price}.00 AUD</h2>
 
             {/* Quantity */}
-            <div>
-              <button onClick={handleDecrement}>-</button>
+            <div className={styles.quantityContainer}>
+              <button
+                className={styles.quantityButton}
+                onClick={handleDecrement}
+              >
+                -
+              </button>
               <input
                 type="number"
                 onChange={handleInputChange}
                 value={quantity}
               />
-              <button onClick={handleIncrement}>+</button>
+              <button
+                className={styles.quantityButton}
+                onClick={handleIncrement}
+              >
+                +
+              </button>
             </div>
             {/* Add To Cart Button */}
             <button
+              className={styles.addToCartButton}
               onClick={() => {
                 handleAddToCart();
               }}
@@ -170,6 +181,7 @@ const ProductPage = ({
             onClick={() => {
               modalRef.current.close();
             }}
+            className={styles.modalButton}
           >
             X
           </button>

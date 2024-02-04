@@ -2,11 +2,13 @@
   display: flex;
   justify-content: space-around;
   //   border: 2px solid orange;
-  margin-top: 10px;
+  padding-top: 10px;
   width: 100vw;
   position: relative;
   padding-bottom: 10px;
   border-bottom: 1px solid gray;
+  //   background-color: bisque;
+  //   background-color: red;
 }
 
 .spaceContainer {
@@ -16,6 +18,7 @@
   max-width: 1200px;
   min-width: 550px;
   width: 80%;
+  box-shadow: 3px 10px 20px rgba(0, 0, 0, 0.438);
 }
 
 .caroContainer {
@@ -36,7 +39,7 @@
 
 .caroButtonBack {
   position: absolute;
-  height: 100%;
+  height: 96%;
   width: 40px;
   justify-self: flex-start;
   color: white;
@@ -51,7 +54,7 @@
 
 .caroButtonNext {
   position: absolute;
-  height: 100%;
+  height: 96%;
   width: 40px;
   justify-self: flex-start;
   color: white;

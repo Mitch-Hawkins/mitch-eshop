@@ -4,7 +4,7 @@ import styles from "./Footer.module.scss";
 const Footer = () => {
   return (
     <div className={styles.container}>
-      <p>Footer</p>
+      <p>Built by Mitch Hawkins using React</p>
     </div>
   );
 };

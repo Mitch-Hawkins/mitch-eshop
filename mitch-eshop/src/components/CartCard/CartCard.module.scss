@@ -39,3 +39,33 @@
   width: 200px;
   height: 200px;
 }
+
+.quantityButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  border-radius: 6px;
+  border: 1px solid gray;
+  width: 40px;
+  height: 20px;
+  font-size: 18px;
+  &:active {
+    background-color: lightgray;
+  }
+}
+
+.removeFromCartButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  border-radius: 6px;
+  border: 1px solid gray;
+  width: 100px;
+  height: 50px;
+  font-size: 18px;
+  &:active {
+    background-color: lightgray;
+  }
+}

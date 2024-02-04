@@ -9,8 +9,18 @@
 }
 
 .checkoutButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  border-radius: 6px;
+  border: 1px solid gray;
   width: 100px;
-  height: 30px;
+  height: 50px;
+  font-size: 18px;
+  &:active {
+    background-color: lightgray;
+  }
 }
 
 .header {
