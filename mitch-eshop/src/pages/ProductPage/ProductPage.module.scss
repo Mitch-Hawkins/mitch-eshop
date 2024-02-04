@@ -1,13 +1,18 @@
+@use "../../media-queries/mixins";
+
 .mainContainer {
   display: flex;
   align-items: center;
   justify-content: center;
-  //   border: 2px solid yellow;
-  height: 80vh;
+  // border: 2px solid yellow;
+  // height: 80vh;
   width: 100vw;
   min-height: 90vh;
   & h2 {
     font-size: 48px;
+  }
+  @include mixins.small {
+    flex-direction: column;
   }
 }
 
@@ -34,11 +39,20 @@
     font-size: 18px;
     padding-left: 50px;
     padding-right: 50px;
+    @include mixins.small {
+      font-size: 12px;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
   }
   & input {
     width: 50px;
     font-size: 24px;
     text-align: center;
+  }
+  @include mixins.small {
+    width: 85%;
+    font-size: 8px;
   }
 }
 

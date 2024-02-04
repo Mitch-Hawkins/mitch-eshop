@@ -1,3 +1,5 @@
+@use "../../media-queries/mixins";
+
 .container {
   display: flex;
   border-bottom: 1px solid gray;
@@ -12,6 +14,9 @@
   box-shadow: 3px 10px 20px rgba(0, 0, 0, 0.247);
   z-index: 1;
   background-color: crimson;
+  @include mixins.small {
+    font-size: 18px;
+  }
   & a {
     text-decoration: none;
     color: black;
