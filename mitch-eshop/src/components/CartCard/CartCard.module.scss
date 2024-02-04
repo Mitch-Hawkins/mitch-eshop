@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+  //   border: 2px solid red;
+  height: 200px;
+  width: 70vw;
+  justify-content: space-around;
+}
+
+.infoContainer {
+  display: flex;
+  //   border: 2px solid blue;
+  align-items: center;
+  gap: 10px;
+}
+
+.nameContainer {
+  display: flex;
+  flex-direction: column;
+  //   border: 2px solid green;
+}
+
+.quantityContainer {
+  display: flex;
+  gap: 5px;
+  & button {
+    width: 20px;
+  }
+}
+
+.priceContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  //   border: 2px solid yellow;
+}
+
+.pedalImage {
+  width: 200px;
+  height: 200px;
+}

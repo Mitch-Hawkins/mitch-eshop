@@ -1,9 +1,15 @@
 import React from "react";
 import CartCard from "../../components/CartCard/CartCard";
+import styles from "./CartContainer.module.scss";
 
 const CartContainer = ({ cartData, setCartData }) => {
   return (
-    <div>
+    <div className={styles.container}>
+      {cartData == "" && (
+        <p className={styles.gridLine}>
+          You have no items in your cart! Better get shopping!
+        </p>
+      )}
       {cartData &&
         cartData.map((item) => {
           //need to add image link to cart
@@ -25,7 +31,7 @@ const CartContainer = ({ cartData, setCartData }) => {
       {cartData && (
         <h1>
           {" "}
-          Total Price:
+          Total Price:{" $"}
           {cartData.reduce((acc, item) => {
             return (acc += item.price * item.quantity);
           }, 0)}

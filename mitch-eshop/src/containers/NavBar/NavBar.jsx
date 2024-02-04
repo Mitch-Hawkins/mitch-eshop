@@ -1,9 +1,10 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import styles from "./NavBar.module.scss";
 
 const NavBar = () => {
   return (
-    <nav>
+    <nav className={styles.container}>
       {/* Header */}
       <NavLink to="/">Home</NavLink>
       {/* Search Bar */}

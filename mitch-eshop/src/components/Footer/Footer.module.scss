@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  height: 5vh;
+  width: 100vw;
+  //   border: 2px solid red;
+  background-color: black;
+  color: white;
+  margin-top: auto;
+  position: relative;
+  //   align-self: flex-end;
+  align-items: center;
+  justify-content: center;
+  & p {
+    text-align: center;
+  }
+  box-shadow: 3px -10px 20px rgba(0, 0, 0, 0.466);
+}

@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import styles from "./CartCard.module.scss";
 
 const CartCard = ({
   id,
@@ -51,15 +52,23 @@ const CartCard = ({
   };
 
   return (
-    <div>
-      <img src={image} />
-      <h3>{name}</h3>
-      <h4>{variant}</h4>
-      <button onClick={handleIncrement}>+</button>
-      <p>Quantity: {quantity}</p>
-      <button onClick={handleDecrement}>-</button>
-      <p>Price: ${quantity * price}.00 AUD</p>
-      <button onClick={handleRemoveFromCart}>Remove from Cart</button>
+    <div className={styles.container}>
+      <img src={image} className={styles.pedalImage} />
+      <div className={styles.infoContainer}>
+        <div className={styles.nameContainer}>
+          <h3>{name}</h3>
+          <h4>{variant}</h4>
+        </div>
+        <div className={styles.priceContainer}>
+          <div className={styles.quantityContainer}>
+            <button onClick={handleIncrement}>+</button>
+            <p>Quantity: {quantity}</p>
+            <button onClick={handleDecrement}>-</button>
+          </div>
+          <p>Price: ${quantity * price}.00 AUD</p>
+        </div>
+        <button onClick={handleRemoveFromCart}>Remove from Cart</button>
+      </div>
     </div>
   );
 };

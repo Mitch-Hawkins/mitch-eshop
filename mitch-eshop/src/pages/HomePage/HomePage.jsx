@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { getAllPedals } from "../../data/services";
 import ProductGrid from "../../containers/ProductGrid/ProductGrid";
+import Carousel from "../../components/Carousel/Carousel";
+import styles from "./HomePage.module.scss";
 
 const HomePage = ({ favouritesData, setFavouritesData }) => {
   const [pedals, setPedals] = useState(null);
@@ -10,8 +12,9 @@ const HomePage = ({ favouritesData, setFavouritesData }) => {
   }, []);
 
   return (
-    <div>
+    <div className={styles.container}>
       {/* Carousel */}
+      <Carousel />
       {/* Product Results List of Cards*/}
       {pedals && (
         <ProductGrid

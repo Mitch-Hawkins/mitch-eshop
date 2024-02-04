@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getPedalById } from "../../data/services";
 import FavouriteButton from "../../components/FavouriteButton/FavouriteButton";
+import styles from "./ProductPage.module.scss";
 
 const ProductPage = ({
   cartData,
@@ -17,6 +18,8 @@ const ProductPage = ({
   const [pedalFullName, setPedalFullName] = useState("");
   const [loading, setLoading] = useState(null);
   const [quantity, setQuantity] = useState(1);
+
+  const modalRef = useRef(null);
 
   const handleInputChange = (e) => {
     console.log(e.target.value);
@@ -91,6 +94,7 @@ const ProductPage = ({
       setCartData(tempArr);
       localStorage.setItem("cartItems", JSON.stringify(tempArr));
     }
+    modalRef.current.showModal();
   };
 
   const handleVariantChange = (selectObjectIndex) => {
@@ -99,49 +103,78 @@ const ProductPage = ({
   };
 
   return (
-    <main>
-      {/* Product Card */}
-      {loading && <p>Loading...</p>}
+    <main className={styles.placeholderContainer}>
       {!loading && productData && (
-        <>
-          <h1>
-            {(variantData.variantTitle &&
-              `${pedalFullName} (${variantData.variantName})`) ||
-              pedalFullName}
-          </h1>
-          <img src={variantData.variantImage || productData.image} />
-          <h2>${productData.price}.00 AUD</h2>
-          <p>{productData.description}</p>
-        </>
+        <div className={styles.mainContainer}>
+          {/* Product Card */}
+          {loading && <p>Loading...</p>}
+          <div className={styles.pedalImageContainer}>
+            <img
+              src={variantData.variantImage || productData.image}
+              className={styles.pedalImage}
+            />
+          </div>
+          <div className={styles.infoContainer}>
+            <h1>
+              {(variantData.variantTitle &&
+                `${pedalFullName} (${variantData.variantName})`) ||
+                pedalFullName}
+            </h1>
+            {/* Favourite Button */}
+            <FavouriteButton
+              favouritesData={favouritesData}
+              setFavouritesData={setFavouritesData}
+              id={id}
+            />
+            <p>{productData.description}</p>
+            {/* Variants */}
+            {productData && (
+              <select
+                onChange={(e) =>
+                  handleVariantChange(e.target.options.selectedIndex)
+                }
+              >
+                {productData.variants.map((variant) => {
+                  return <option value={variant}>{variant.variantName}</option>;
+                })}
+              </select>
+            )}
+
+            <h2>${productData.price}.00 AUD</h2>
+
+            {/* Quantity */}
+            <div>
+              <button onClick={handleDecrement}>-</button>
+              <input
+                type="number"
+                onChange={handleInputChange}
+                value={quantity}
+              />
+              <button onClick={handleIncrement}>+</button>
+            </div>
+            {/* Add To Cart Button */}
+            <button
+              onClick={() => {
+                handleAddToCart();
+              }}
+            >
+              Add To Cart
+            </button>
+          </div>
+        </div>
       )}
-      {/* Quantity */}
-      <button onClick={handleDecrement}>-</button>
-      <input type="number" onChange={handleInputChange} value={quantity} />
-      <button onClick={handleIncrement}>+</button>
-      {/* Add To Cart Button */}
-      <button
-        onClick={() => {
-          handleAddToCart();
-        }}
-      >
-        Add To Cart
-      </button>
-      {/* Favourite Button */}
-      <FavouriteButton
-        favouritesData={favouritesData}
-        setFavouritesData={setFavouritesData}
-        id={id}
-      />
-      {/* Variants */}
-      {productData && (
-        <select
-          onChange={(e) => handleVariantChange(e.target.options.selectedIndex)}
-        >
-          {productData.variants.map((variant) => {
-            return <option value={variant}>{variant.variantName}</option>;
-          })}
-        </select>
-      )}
+      <dialog className={styles.modalContainer} ref={modalRef}>
+        <div className={styles.modalContentContainer}>
+          <p>Added!</p>
+          <button
+            onClick={() => {
+              modalRef.current.close();
+            }}
+          >
+            X
+          </button>
+        </div>
+      </dialog>
     </main>
   );
 };

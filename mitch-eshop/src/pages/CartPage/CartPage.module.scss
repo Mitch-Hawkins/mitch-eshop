@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-self: flex-start;
+  min-height: 90vh;
+  //   border: 2px solid yellow;
+  padding-bottom: 20px;
+  align-items: center;
+}
+
+.checkoutButton {
+  width: 100px;
+  height: 30px;
+}
+
+.header {
+  display: flex;
+  //   border: 2px solid blue;
+  padding-top: 40px;
+  font-size: 56px;
+  padding-bottom: 40px;
+  text-align: center;
+  justify-content: center;
+  width: 100vw;
+}

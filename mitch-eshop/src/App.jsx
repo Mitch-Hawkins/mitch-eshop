@@ -6,6 +6,8 @@ import ProductPage from "./pages/ProductPage/ProductPage";
 import NavBar from "./containers/NavBar/NavBar";
 import FavouritesPage from "./pages/FavouritesPage/FavouritesPage";
 import CartPage from "./pages/CartPage/CartPage";
+import Footer from "./components/Footer/Footer";
+// import styles from "./App.scss";
 
 function App() {
   const [cartData, setCartData] = useState([]);
@@ -44,8 +46,7 @@ function App() {
   //useEffect here to grab initial favourites data from the local storage
 
   return (
-    <>
-      {/* <TestProduct /> */}
+    <main className="container">
       <BrowserRouter>
         <NavBar />
         {/* NavBar */}
@@ -89,9 +90,10 @@ function App() {
           {/* Route - Cart */}
           {/* Routes */}
         </Routes>
+        {/* Footer */}
       </BrowserRouter>
-      {/* Footer */}
-    </>
+      <Footer />
+    </main>
   );
 }
 

@@ -1,0 +1,209 @@
+.container {
+  display: flex;
+  justify-content: space-around;
+  //   border: 2px solid orange;
+  margin-top: 10px;
+  width: 100vw;
+  position: relative;
+  padding-bottom: 10px;
+  border-bottom: 1px solid gray;
+}
+
+.spaceContainer {
+  display: flex;
+  justify-content: space-around;
+  //   border: 2px solid yellow;
+  max-width: 1200px;
+  min-width: 550px;
+  width: 80%;
+}
+
+.caroContainer {
+  display: flex;
+  //   border: 2px solid red;
+  overflow: hidden;
+  justify-content: space-around;
+  max-width: 1200px;
+}
+
+.buttonContainer {
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.caroButtonBack {
+  position: absolute;
+  height: 100%;
+  width: 40px;
+  justify-self: flex-start;
+  color: white;
+  font-size: 40px;
+  background: none;
+  border: none;
+  transform: translateX(20px);
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.473);
+  }
+}
+
+.caroButtonNext {
+  position: absolute;
+  height: 100%;
+  width: 40px;
+  justify-self: flex-start;
+  color: white;
+  font-size: 40px;
+  background: none;
+  border: none;
+  transform: translateX(-20px);
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.473);
+  }
+}
+
+@keyframes slide1_0 {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(200%);
+  }
+}
+
+@keyframes slide3 {
+  from {
+    transform: translateX(200%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes slide3_4 {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(-200%);
+  }
+}
+
+@keyframes slide1 {
+  from {
+    transform: translateX(-200%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes slide1_2 {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes slide2_1 {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes slide2_3 {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes slide3_2 {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes slide4_3 {
+  from {
+    transform: translateX(-200%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes slide0_1 {
+  from {
+    transform: translateX(200%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+.caroImage1_0_3 {
+  height: 100%;
+  width: 100%;
+  animation: slide1_0 1.5s forwards 0s, slide3 0s forwards 1.51s;
+}
+
+.caroImage3_4_1 {
+  height: 100%;
+  width: 100%;
+  animation: slide3_4 1.5s forwards 0s, slide1 0s forwards 1.51s;
+}
+
+.caroImage1_2 {
+  height: 100%;
+  width: 100%;
+  animation: slide1_2 1.5s forwards 0s;
+}
+
+.caroImage2_1 {
+  height: 100%;
+  width: 100%;
+  animation: slide2_1 1.5s forwards 0s;
+}
+
+.caroImage2_3 {
+  height: 100%;
+  width: 100%;
+  animation: slide2_3 1.5s forwards 0s;
+}
+
+.caroImage3_2 {
+  height: 100%;
+  width: 100%;
+  animation: slide3_2 1.5s forwards 0s;
+}
+
+.caroImage4_3 {
+  height: 100%;
+  width: 100%;
+  animation: slide4_3 1.5s forwards 0s;
+}
+
+.caroImage0_1 {
+  height: 100%;
+  width: 100%;
+  animation: slide0_1 1.5s forwards 0s;
+}
+
+.caroImage2 {
+  height: 100%;
+  width: 100%;
+  transform: translateX(0);
+}

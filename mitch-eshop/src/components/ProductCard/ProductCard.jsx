@@ -29,13 +29,13 @@ const ProductCard = ({
             setFavouritesData={setFavouritesData}
           />
         </h3>
-        <img
-          src={image}
+        <div
+          className={styles.imageContainer}
           onClick={() => navigate(`/product/${id}`)}
-          className={styles.pedalImage}
-        />
-
-        <p>${price}</p>
+        >
+          <img src={image} className={styles.pedalImage} />
+          <p>${price}</p>
+        </div>
       </div>
     </>
   );
